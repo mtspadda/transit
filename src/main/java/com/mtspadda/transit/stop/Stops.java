@@ -11,7 +11,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Stop {
+public class Stops {
 
     @Id
     private String stopId;
