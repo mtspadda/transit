@@ -2,14 +2,18 @@ package com.mtspadda.transit.gtfs.row;
 
 import org.apache.commons.csv.CSVRecord;
 
-public record TripRow(String routeId, String serviceId, String tripHeadsign, Integer directionId) {
+import static com.mtspadda.transit.gtfs.row.CsvFields.*;
 
-    static TripRow from(CSVRecord r){
+public record TripRow(String tripId, String routeId, String serviceId,
+                      String tripHeadsign, Integer directionId) {
+
+    public static TripRow from(CSVRecord r) {
         return new TripRow(
+                r.get("trip_id"),
                 r.get("route_id"),
                 r.get("service_id"),
-                r.get("trip_headsign"),
-                Integer.parseInt(r.get("direction_id"))
+                optional(r, "trip_headsign"),
+                optionalInt(r, "direction_id")
         );
     }
 }

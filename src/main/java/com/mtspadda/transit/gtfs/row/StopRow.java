@@ -4,15 +4,15 @@ import org.apache.commons.csv.CSVRecord;
 
 import static com.mtspadda.transit.gtfs.row.CsvFields.optional;
 
-public record StopRow (String stopId, String stopCode, String stopName, String stopLat, String stopLon) {
+public record StopRow (String stopId, String stopCode, String stopName, Double stopLat, Double stopLon) {
 
-    static StopRow from(CSVRecord r){
+    public static StopRow from(CSVRecord r){
         return new StopRow(
                 r.get("stop_id"),
                 optional(r,"stop_code"),
                 r.get("stop_name"),
-                r.get("stop_lat"),
-                r.get("stop_lon")
+                Double.parseDouble(r.get("stop_lat")),
+                Double.parseDouble(r.get("stop_lon"))
         );
     }
 }

@@ -1,0 +1,4 @@
+stop_id,stop_code,stop_name,stop_lat,stop_lon
+TEST_0001,101,O'Connell Street Upper,53.351000,-6.260700
+TEST_0002,102,Parnell Square West,53.352200,-6.263700
+TEST_0003,,"Dame Street, Trinity",53.344100,-6.261500

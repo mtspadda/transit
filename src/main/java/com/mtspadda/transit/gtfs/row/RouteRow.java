@@ -15,14 +15,4 @@ public record RouteRow(String routeId, String agencyId, String routeShortName, S
                 Integer.parseInt(r.get("route_type"))
         );
     }
-
-    /**
-     *     @Id
-     *     private String routeId;
-     *
-     *     private String agencyId;
-     *     private String routeShortName;
-     *     private String routeLongName;
-     *     private Integer routeType;
-     */
 }
