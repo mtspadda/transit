@@ -14,10 +14,10 @@ public class TransitApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TransitApplication.class, args);
 	}
-
+/**
 	@Bean
 	ApplicationRunner testImport(GtfsImportService importService) {
 		return args -> importService.importLatestFeed();
 	}
-
+**/
 }
