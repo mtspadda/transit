@@ -15,14 +15,14 @@ import java.nio.file.StandardCopyOption;
 import java.time.Duration;
 
 @Component
-public class GtfsDowloader {
+public class GtfsDownloader {
 
-    private static final Logger log = LoggerFactory.getLogger(GtfsDowloader.class);
+    private static final Logger log = LoggerFactory.getLogger(GtfsDownloader.class);
 
     private final RestClient restClient;
     private final GtfsProperties properties;
 
-    public GtfsDowloader(GtfsProperties properties){
+    public GtfsDownloader(GtfsProperties properties){
         this.properties = properties;
 
 

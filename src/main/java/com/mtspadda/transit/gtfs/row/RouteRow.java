@@ -6,7 +6,7 @@ import static com.mtspadda.transit.gtfs.row.CsvFields.optional;
 
 public record RouteRow(String routeId, String agencyId, String routeShortName, String routeLongName, Integer routeType) {
 
-    static RouteRow from(CSVRecord r){
+    public static RouteRow from(CSVRecord r){
         return new RouteRow(
                 r.get("route_id"),
                 optional(r,"agency_id"),

@@ -18,7 +18,7 @@ public record StopTimeRow(
         Integer dropOffType
 ) {
 
-    static StopTimeRow from(CSVRecord r) {
+    public static StopTimeRow from(CSVRecord r) {
         return new StopTimeRow(
                 r.get("trip_id"),
                 r.get("stop_id"),
