@@ -1,0 +1,2 @@
+gtfs:
+  import-on-startup: false

@@ -9,6 +9,6 @@ import java.net.URI;
 
 @Validated
 @ConfigurationProperties(prefix = "gtfs")
-public record GtfsProperties(@NotNull URI staticUrl) {
+public record GtfsProperties(@NotNull URI staticUrl, boolean importOnStartup) {
 
 }
