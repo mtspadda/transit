@@ -92,6 +92,25 @@ public class GtfsImportServiceIT {
 
     @Test
     void fillGeographicLocation(){
+        service.importZip(sampleZip(Map.of()));
+
+        Double lat = jdbc.queryForObject(
+                "SELECT ST_Y(location::geometry) FROM stops WHERE stop_id = 'TEST_0001'", Double.class);
+        Double lon = jdbc.queryForObject(
+                "SELECT ST_X(location::geometry) FROM stops WHERE stop_id = 'TEST_0001'", Double.class);
+
+        assertThat(lat).isCloseTo(53.351, within(0.000001));
+        assertThat(lon).isCloseTo(-6.2607, within(0.000001));
+
+    }
+
+    @Test
+    void reimportReplacePreviousData(){
+        service.importZip(sampleZip(Map.of()));
+        service.importZip(sampleZip(Map.of()));
+
+        assertThat(count("stops")).isEqualTo(3);
+        assertThat(count("stop_times")).isEqualTo(5);
 
     }
 
