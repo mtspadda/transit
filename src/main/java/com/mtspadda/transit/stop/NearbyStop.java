@@ -4,7 +4,7 @@ public interface NearbyStop {
     String getStopId();
     String getStopCode();
     String getStopName();
-    Double getStopLat();
-    Double getStopLon();
-    Double getDistanceMeters();
+    double getStopLat();
+    double getStopLon();
+    long getDistanceMeters();
 }
