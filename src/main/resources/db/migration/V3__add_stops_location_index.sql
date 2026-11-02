@@ -1,0 +1,1 @@
+CREATE INDEX idx_stops_location ON stops USING GIST (location);
