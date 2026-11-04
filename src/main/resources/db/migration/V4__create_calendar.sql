@@ -9,7 +9,7 @@ CREATE TABLE calendar (
     sunday      BOOLEAN NOT NULL,
     start_date  DATE    NOT NULL,
     end_date    DATE    NOT NULL,
-    CONSTRAINT ck_calendar_dates CHECK ( end_date >= start_date );
+    CONSTRAINT ck_calendar_dates CHECK ( end_date >= start_date )
 );
 
 CREATE TABLE calendar_dates (
