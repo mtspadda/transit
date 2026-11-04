@@ -1,9 +1,6 @@
 package com.mtspadda.transit.gtfs;
 
-import com.mtspadda.transit.gtfs.row.RouteRow;
-import com.mtspadda.transit.gtfs.row.StopRow;
-import com.mtspadda.transit.gtfs.row.StopTimeRow;
-import com.mtspadda.transit.gtfs.row.TripRow;
+import com.mtspadda.transit.gtfs.row.*;
 import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +15,7 @@ import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Date;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +110,34 @@ public class GtfsImportService {
                             ps.setObject(8, st.dropOffType(), Types.SMALLINT);
                         });
 
+                importFile(zip, "calendar.txt", CalendarRow::from, """
+                        INSERT INTO calendar (service_id, monday, tuesday, wednesday, thursday, friday,
+                        saturday, sunday, start_date, end_date)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+
+                        (ps, c)  -> {
+                            ps.setString(1, c.serviceId());
+                            ps.setBoolean(2, c.monday());
+                            ps.setBoolean(3, c.tuesday());
+                            ps.setBoolean(4, c.wednesday());
+                            ps.setBoolean(5, c.thursday());
+                            ps.setBoolean(6, c.friday());
+                            ps.setBoolean(7, c.saturday());
+                            ps.setBoolean(8, c.sunday());
+                            ps.setObject(9, c.startDate());
+                            ps.setObject(10, c.endDate());
+                        });
+
+                importFile(zip, "calendar_dates.txt", CalendarDateRow::from, """
+                        INSERT INTO calendar_dates (service_id, date, exception_type)
+                        VALUES (?, ?, ?)""",
+
+                        (ps, cd)  -> {
+                            ps.setString(1, cd.serviceId());
+                            ps.setObject(2, cd.date());
+                            ps.setInt(3, cd.exceptionType());
+                        });
+
             } catch (IOException e) {
                 throw new UncheckedIOException("Failed to open GTFS zip", e);
             }
@@ -126,6 +152,8 @@ public class GtfsImportService {
         jdbc.update("DELETE FROM trips");
         jdbc.update("DELETE FROM stops");
         jdbc.update("DELETE FROM routes");
+        jdbc.update("DELETE FROM calendar");
+        jdbc.update("DELETE FROM calendar_dates");
     }
 
     private <T> void importFile(ZipFile zip, String fileName, Function<CSVRecord, T> mapper,
