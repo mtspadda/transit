@@ -16,4 +16,10 @@ public class StopService {
                 .map(NearbyStopResponse::from)
                 .toList();
     }
+
+    public List<StopResponse> findByCode(String code) {
+        return repository.findByStopCode(code).stream()
+                .map(StopResponse::from)
+                .toList();
+    }
 }

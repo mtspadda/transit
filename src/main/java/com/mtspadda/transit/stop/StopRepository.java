@@ -27,4 +27,6 @@ public interface StopRepository extends JpaRepository<Stops, String> {
                                 @Param("lon") double lon,
                                 @Param("radius") double radiusMeters,
                                 @Param("limit") int limit);
+
+    List<Stops> findByStopCode(String stopCode);
 }

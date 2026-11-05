@@ -28,4 +28,9 @@ public class StopController {
 
         return service.findNearby(lat, lon, radius, limit);
     }
+
+    @GetMapping
+    List<StopResponse> findByCode(@RequestParam String code) {
+        return service.findByCode(code);
+    }
 }
