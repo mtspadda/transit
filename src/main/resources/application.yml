@@ -10,3 +10,8 @@ gtfs:
     static-url: https://www.transportforireland.ie/transitData/Data/GTFS_Realtime.zip
     import-cron: "0 0 4 * * *"      # every day 4am | second minute hour day month day of the week
     import-on-startup: true
+    realtime:
+        enabled: true
+        url: https://api.nationaltransport.ie/gtfsr/v2/TripUpdates
+        api-key: ${NTA_API_KEY:}
+        poll-interval-ms: 60000
