@@ -1,2 +1,4 @@
 gtfs:
   import-on-startup: false
+  realtime:
+    enabled: false
