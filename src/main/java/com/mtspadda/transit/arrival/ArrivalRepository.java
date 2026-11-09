@@ -39,7 +39,7 @@ class ArrivalRepository {
             )
             SELECT st.trip_id,
                    st.arrival_time,
-                   st.stop_sequence
+                   st.stop_sequence,
                    COALESCE(r.route_short_name, r.route_long_name) AS route_name,
                    t.trip_headsign
             FROM stop_times st

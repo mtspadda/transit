@@ -51,7 +51,7 @@ public final class PredictionResolver {
 
     private static Integer delayOf(StopUpdate update, long scheduledEpochSeconds){
         if (update.arrivalEpochSeconds() != null){
-            return (int) (update.arrivalEpochSeconds() - scheduledEpochSeconds)
+            return (int) (update.arrivalEpochSeconds() - scheduledEpochSeconds);
         }
         return update.arrivalDelaySeconds();
     }

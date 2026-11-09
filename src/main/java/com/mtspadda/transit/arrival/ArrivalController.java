@@ -19,7 +19,7 @@ public class ArrivalController {
             @PathVariable String stopId,
             @RequestParam(defaultValue = "60") @Min(1) @Max(180) int minutes){
 
-        return service.scheduledArrivals(stopId, minutes);
+        return service.nextArrivals(stopId, minutes);
     }
 
 }
