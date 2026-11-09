@@ -39,6 +39,7 @@ class ArrivalRepository {
             )
             SELECT st.trip_id,
                    st.arrival_time,
+                   st.stop_sequence
                    COALESCE(r.route_short_name, r.route_long_name) AS route_name,
                    t.trip_headsign
             FROM stop_times st
@@ -63,7 +64,8 @@ class ArrivalRepository {
                 rs.getString("trip_id"),
                 rs.getInt("arrival_time"),
                 rs.getString("route_name"),
-                rs.getString("trip_headsign")));
+                rs.getString("trip_headsign"),
+                rs.getInt("stop_sequence")));
     }
 
 
