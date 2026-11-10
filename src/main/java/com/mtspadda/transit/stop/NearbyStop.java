@@ -7,4 +7,5 @@ public interface NearbyStop {
     double getStopLat();
     double getStopLon();
     long getDistanceMeters();
+    String getTransportType();
 }

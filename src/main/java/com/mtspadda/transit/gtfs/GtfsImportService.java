@@ -110,6 +110,14 @@ public class GtfsImportService {
                             ps.setObject(8, st.dropOffType(), Types.SMALLINT);
                         });
 
+                int links = jdbc.update("""
+                        INSERT INTO stop_routes (stop_id, route_id)
+                        SELECT DISTINCT st.stop_id, t.route_id
+                        FROM stop_times st
+                        JOIN trips t ON t.trip_id = st.trip_id
+                        """);
+                log.info("Linked {} stop/route pairs", links);
+
                 importFile(zip, "calendar.txt", CalendarRow::from, """
                         INSERT INTO calendar (service_id, monday, tuesday, wednesday, thursday, friday,
                         saturday, sunday, start_date, end_date)
@@ -148,6 +156,7 @@ public class GtfsImportService {
 
     private void clearTables() {
         // Ordem inversa das foreign keys: filhos antes dos pais
+        jdbc.update("DELETE FROM stop_routes");
         jdbc.update("DELETE FROM stop_times");
         jdbc.update("DELETE FROM trips");
         jdbc.update("DELETE FROM stops");

@@ -6,7 +6,8 @@ public record NearbyStopResponse(
         String name,
         double lat,
         double lon,
-        long distanceMeters
+        long distanceMeters,
+        String transportType
 ) {
 
     static NearbyStopResponse from(NearbyStop stop){
@@ -16,7 +17,8 @@ public record NearbyStopResponse(
                 stop.getStopName(),
                 stop.getStopLat(),
                 stop.getStopLon(),
-                Math.round(stop.getDistanceMeters())
+                Math.round(stop.getDistanceMeters()),
+                stop.getTransportType()
         );
     }
 }
